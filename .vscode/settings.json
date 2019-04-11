@@ -23,6 +23,16 @@
         "type_traits": "cpp",
         "typeinfo": "cpp",
         "cmath": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "mutex": "cpp",
+        "ctime": "cpp",
+        "array": "cpp",
+        "chrono": "cpp",
+        "condition_variable": "cpp",
+        "memory": "cpp",
+        "ratio": "cpp",
+        "thread": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp"
     }
 }
