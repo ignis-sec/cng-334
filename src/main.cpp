@@ -3,17 +3,26 @@
 #include <thread>
 #include <mutex>
 
+#include "semaphore.hpp"
+
 #define MAX_THREADS 15
+
+//temp
+#include <unistd.h>
+
 
 std::mutex mtx;
 
+
+semaphore t;
+
 void test(int id){
-	std::unique_lock<std::mutex> lck (mtx,std::defer_lock);
-	//Lock critical section
-	lck.lock();
-	std::cout << "bar" << id << "\n";
-	//release spinlock
-	lck.unlock();
+	std::cout << "Sleeping in non-critical\n";
+	sleep(1);
+	t.wait();
+	std::cout << "Sleeping in critical\n";
+	sleep(1);
+	t.signal();
 }
 
 int main(int argc, char *argv[]) {

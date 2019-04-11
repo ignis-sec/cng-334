@@ -33,6 +33,9 @@
         "ratio": "cpp",
         "thread": "cpp",
         "tuple": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "cstdarg": "cpp",
+        "cstring": "cpp",
+        "algorithm": "cpp"
     }
 }
