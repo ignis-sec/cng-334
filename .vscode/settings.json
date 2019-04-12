@@ -36,6 +36,11 @@
         "utility": "cpp",
         "cstdarg": "cpp",
         "cstring": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "fstream": "cpp",
+        "optional": "cpp",
+        "sstream": "cpp"
     }
 }

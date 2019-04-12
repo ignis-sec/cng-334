@@ -1,13 +1,19 @@
+#pragma once
 #include <string>
+#include "transaction.hpp"
+#include <vector>
 
-unsigned int maxid=0;
+class BankAccount;
 
-class user{
+class User{
 public:
-    user(std::string name);
+    User(std::string name);
 
     const unsigned int _userid;
-
+    Transaction *requestTransaction(unsigned int amount, User *recipent);
 private:
-   std::string _name;
+   std::string _name; 
+   std::string _surname;
+   std::vector<Transaction> transactionList; 
+   BankAccount* _acc;
 };
