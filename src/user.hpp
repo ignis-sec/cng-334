@@ -1,8 +1,9 @@
 #pragma once
 #include <string>
-#include "transaction.hpp"
 #include <vector>
 
+
+class Transaction;
 class BankAccount;
 
 class User{

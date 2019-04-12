@@ -11,11 +11,11 @@ User::User(std::string name):_userid(++_maxid){
 
 
  Transaction* User::requestTransaction(unsigned int amount, User *recipent){
-    Transaction *t = new Transaction(amount, recipent, this);
     std::cout <<"New transaction requested.\n";
-    return t;
+    Transaction t(amount, recipent, this);
+    return &t;
  }
 
  BankAccount* User::getAccount(){
-     return _acc;
+     return _acc; 
  }
