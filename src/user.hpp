@@ -11,6 +11,7 @@ public:
 
     const unsigned int _userid;
     Transaction *requestTransaction(unsigned int amount, User *recipent);
+    BankAccount* getAccount();
 private:
    std::string _name; 
    std::string _surname;

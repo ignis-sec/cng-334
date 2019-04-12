@@ -9,3 +9,4 @@ private:
     float accountBalance;
     User* owner;
 };
+

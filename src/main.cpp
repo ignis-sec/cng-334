@@ -7,6 +7,7 @@
 #include "transaction.hpp"
 #include "semaphore.hpp"
 #include <vector>
+#include "ithread.hpp"
 #define MAX_THREADS 155
 
 //temp
@@ -38,10 +39,7 @@ void handleInput(User u){
 	std::cout << "Something!\n";
 	while(1){
 		std::cin >> ch;
-		if(ch=='A') threads.push_back(new std::thread(&User::requestTransaction, u, 100, &r));
-		for(auto &t : threads){
-			t->join();
-		}
+		if(ch=='A') threads.push_back(new ithread(&User::requestTransaction, u, 100, &r));
 	}
   
 } 

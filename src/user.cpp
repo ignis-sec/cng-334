@@ -15,3 +15,7 @@ User::User(std::string name):_userid(++_maxid){
     std::cout <<"New transaction requested.\n";
     return t;
  }
+
+ BankAccount* User::getAccount(){
+     return _acc;
+ }
