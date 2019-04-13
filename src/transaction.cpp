@@ -4,9 +4,10 @@
 #include "BankAccount.hpp"
 #include "user.hpp"
 #include "ithread.hpp"
+#include "semaphore_c.hpp"
 #include <unistd.h>
 #include <iostream>
-semaphore s;
+Semaphore_c s(1000);
 
 
  Transaction::Transaction(unsigned int amount, User* receiver, User* sender){
@@ -21,15 +22,15 @@ semaphore s;
  bool Transaction::invoke(){
      BankAccount* recv_acc = _receiver->getAccount();
      std::cout << "Reached critical section.\n";
-     s.wait();
      try{
-       sleep(2);
+        if(s.wait()) throw(1);
+        sleep(2);
+        s.signal();
+        std::cout << "Transaction completed.\n";
      }catch(int n){
-         std::cout << "Catching.\n";
-         this->decline();
+        std::cout << "Catching.\n";
+        this->decline();
      }
-     s.signal();
-     std::cout << "Transaction completed.\n";
  }
 
 

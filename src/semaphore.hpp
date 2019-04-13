@@ -4,7 +4,7 @@
 
 class semaphore
 {
-private:
+protected:
     std::mutex _mutex;
     std::condition_variable _condition;
     unsigned long _count = 1;

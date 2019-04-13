@@ -1,6 +1,6 @@
 #pragma once
 #include "semaphore.hpp"
-
+#include <iostream>
 
 void semaphore::signal(){
     std::lock_guard<std::mutex> lock(_mutex);
