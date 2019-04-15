@@ -2,20 +2,23 @@
 #include <string>
 #include <vector>
 
-
 class Transaction;
+class Payment;
+class Withdrawal;
 class BankAccount;
 
 class User{
 public:
     User(std::string name);
-
+    User(std::string name, BankAccount* __acc);
     const unsigned int _userid;
-    Transaction *requestTransaction(unsigned int amount, User *recipent);
+    Payment *requestPayment(unsigned int amount, User *recipent);
+    Withdrawal *requestWithdraw(unsigned int amount);
     BankAccount* getAccount();
+    void setAccount(BankAccount* __acc);
 private:
-   std::string _name; 
-   std::string _surname;
-   std::vector<Transaction> transactionList; 
-   BankAccount* _acc;
+    std::string _name;
+    std::vector<Transaction*> transactionList; 
+    std::string _surname;
+    BankAccount* _acc;
 };

@@ -2,6 +2,8 @@
 #include <mutex>
 #include <condition_variable>
 
+//My take on the semaphores using mutex and condition variable.
+
 class semaphore
 {
 protected:

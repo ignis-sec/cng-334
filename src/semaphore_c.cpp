@@ -1,6 +1,27 @@
 #include "semaphore_c.hpp"
-#include "ithread.hpp"
 #include <iostream>
+#include "ithread.hpp"
+
+
+
+
+//THIS CLASS IS UNUSED SEE SEMAPHORE.HPP INSTEAD
+//
+//I tried to create a semaphore that had max wait time, and that would timeout after the interval has passed.
+//This could be used as:
+/*
+try{
+  if(s.wait()) throw;    
+}
+*/
+//to check.
+//Class does not function with %100 confidence, sometimes next thread hitting wait is being killed instead of the current one,
+//And i found it to be too expensive to use with every operation.
+
+
+
+
+
 
 
 Semaphore_c::Semaphore_c(unsigned int __timeoutms, void *(callback)){
@@ -18,11 +39,10 @@ int Semaphore_c::wait(){
     ithread *t;
         while(_count==0){
             t = new ithread(&Semaphore_c::timeout, this);
-             _condition.wait(lock);
-        }
+            _condition.wait(lock);
+        }   
         return --_count;
 }
-
 void Semaphore_c::timeout(){
     sleep(1);
     if(_count==0){
@@ -30,5 +50,4 @@ void Semaphore_c::timeout(){
         std::lock_guard<std::mutex> lock(_mutex);
         _condition.notify_one();
     }
-    
 }

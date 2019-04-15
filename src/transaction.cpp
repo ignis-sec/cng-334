@@ -1,39 +1,20 @@
 #pragma once
 #include "transaction.hpp"
-#include "semaphore.hpp"
-#include "BankAccount.hpp"
-#include "user.hpp"
-#include "ithread.hpp"
-#include "semaphore_c.hpp"
-#include <unistd.h>
 #include <iostream>
-Semaphore_c s(1000);
 
+//BASE Class only, not to be used by itself. Instead, check payment.hpp and withdrawal.hpp
 
- Transaction::Transaction(unsigned int amount, User* receiver, User* sender){
-     _amount=amount;
-     _receiver=receiver;    
-     _sender=sender;
-     _status = PENDING;
-     std::cout << "Invoking transaction.\n";
-     this->invoke();
- }
-
- bool Transaction::invoke(){
-     BankAccount* recv_acc = _receiver->getAccount();
-     std::cout << "Reached critical section.\n";
-     try{
-        if(s.wait()) throw(1);
-        sleep(2);
-        s.signal();
-        std::cout << "Transaction completed.\n";
-     }catch(int n){
-        std::cout << "Catching.\n";
-        this->decline();
-     }
- }
-
+Transaction::Transaction(){
+    _status= PENDING;
+}
 
  void Transaction::decline(){
      std::cout << "Declining.\n";
+     _status = DECLINED;
+ }
+
+
+ void Transaction::finalize(){
+    std::cout << "Transaction completed.\n";
+    _status = COMPLETED;
  }
