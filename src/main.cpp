@@ -13,9 +13,10 @@
 #define MAX_THREADS 155
 
 //Ata Hakçıl 2243467
-//Tested on Linux 4.19.0
-//SMP Debian 4.19.13 (2019-01-03) x86_64 GNU/Linux
 
+//Tested on Linux 4.19.0 and Windows 10 x64
+//SMP Debian 4.19.13 (2019-01-03) x86_64 GNU/Linux
+//10.0.17134 Build 17134 x64
 
 
 //Initialize test accounts
