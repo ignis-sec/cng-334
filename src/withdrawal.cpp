@@ -24,11 +24,15 @@ semaphore sw;
 
 bool Withdrawal::invoke(){
      try{
+        #ifdef SERIAL_WAIT
+            sleep(SERIAL_WAIT_TIME);
+        #endif
+
         #ifdef VERBOSE
         std::cout << "Reached critical section.\n";
         #endif
         //wait for other threads to finish critical section
-        #if SUBMISSION_WEEK>2
+        #if SUBMISSION_WEEK>SYNC_WEEK
             sw.wait();
         #endif
         //Status can be used to to classify ongoing transactions in the transaction table (Not implemented yet)
@@ -38,7 +42,7 @@ bool Withdrawal::invoke(){
         std::cout << "New balance is: " << new_balance << std::endl;
 
         //signal end of critical section
-        #if SUBMISSION_WEEK>2
+        #if SUBMISSION_WEEK>SYNC_WEEK
         sw.signal();
         #endif
 
