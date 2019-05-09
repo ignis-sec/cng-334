@@ -7,6 +7,7 @@
 #include "ithread.hpp"
 #include "semaphore_c.hpp"
 #include "bankAccount.hpp"
+#include "meta.h"
 
 //semaphore for the payment mutual exclusive read/write
 semaphore sp;
@@ -22,10 +23,17 @@ semaphore sp;
 //Start the processing of a transaction. Called immediately after constructor.
 bool Payment::invoke(){
      try{
-         std::cout << "Reached critical section.\n";
-        //wait for other threads to finish critical section
-        sp.wait();
+        #ifdef SERIAL_WAIT
+            sleep(SERIAL_WAIT_TIME);
+        #endif
 
+        #ifdef VERBOSE
+        std::cout << "Reached critical section.\n";
+        #endif
+        //wait for other threads to finish critical section
+        #if SUBMISSION_WEEK>2
+        sp.wait();
+        #endif
         //Status can be used to to classify ongoing transactions in the transaction table (Not implemented yet)
         _status = INITIALIZED;
         //deduct from owners account
@@ -37,7 +45,9 @@ bool Payment::invoke(){
         std::cout << "New balance receiver is: " << new_balance << std::endl;
 
         //signal end of critical section
+        #if SUBMISSION_WEEK>2
         sp.signal();
+        #endif
 
         //finalize the transaction with Transaction::finalize()
         finalize();
